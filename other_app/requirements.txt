@@ -1,0 +1,9 @@
+flask
+psycopg2
+Flask-SQLAlchemy
+flask-migrate
+marshmallow-sqlalchemy==0.23.1
+marshmallow==3.7.1
+flask-marshmallow==0.13.0
+Flask-Testing
+requests

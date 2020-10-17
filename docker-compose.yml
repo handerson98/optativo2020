@@ -1,0 +1,56 @@
+version: "3.6"
+services:
+
+  flaskyapp:
+    build:
+      context: ./flasky_app
+      dockerfile: dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - PYTHONUNBUFFER=1
+
+    networks:
+      - microservices
+      - db-net
+
+
+    volumes:
+      - "./flasky_app:/usr/src/app/flasky_app"
+
+  other_app:
+    build:
+      context: ./other_app
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+    environment:
+        - FLASK_ENV=development
+        - FLASK_APP=app.py
+        - PYTHONUNBUFFER=1
+
+    networks:
+      - microservices
+
+    volumes:
+      - "./other_app:/usr/src/app/other_app"
+
+
+
+  postgres-db:
+    build:
+      context: ./flasky_app/DATABASE
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - db-net
+
+
+networks:
+  microservices:
+    name: microservices
+  db-net:
+    name: db-net

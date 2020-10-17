@@ -1,0 +1,9 @@
+FROM python:3.8.5-alpine3.12
+RUN apk add postgresql-dev postgresql-libs gcc musl-dev
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+EXPOSE 5000
+COPY . /usr/src/app/flasky_app
+WORKDIR /usr/src/app/flasky_app
+RUN pip install -r requirements.txt
+CMD ["flask","run","--host=0.0.0.0"]
