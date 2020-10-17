@@ -17,7 +17,7 @@ def createUser():
                     db.session.commit()
                     return userObject.name+" se registrado con éxito", 201
                 return jsonify("password do not match"), 400
-            return "ya existe el usuario", 409
+            return "ya existe el usuario con ese correo", 409
         return "hay campos vacíos",400
     return 405
 
